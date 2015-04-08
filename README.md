@@ -11,8 +11,6 @@ Simple OpenGL Engine
 
 * SDL (or optionally SFML)
 
-* GLFW
-
 * GLM
 
 * Glew
