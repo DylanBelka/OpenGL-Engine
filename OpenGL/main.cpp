@@ -2,9 +2,8 @@
 #include <random>
 
 #include <glew.h>
-#include <GLFW\glfw3.h>
 #include <glm/glm.hpp>
-#include <SFML\Graphics.hpp>
+//test
 
 #include "tiny_obj_loader.h"
 
@@ -23,23 +22,6 @@
 Fix timer/ make better one
 Create light class that has mesh
 Create a lower poly sphere to use for stars - instanced
-*/
-
-/*
-bool isCollision(BasicMesh a, BasicMesh b)
-{
-	if (abs(a.getPosition().x - b.getPosition().x) < a.getScale().x + b.getScale().x)
-	{
-		if (abs(a.getPosition().y - b.getPosition().y) < a.getScale().y + b.getScale().y)
-		{
-			if (abs(a.getPosition().z - b.getPosition().z) < a.getScale().z + b.getScale().z)
-			{
-				return true;
-			}
-		}
-	}
-	return false;
-}
 */
 
 static sf::Clock gameClock;
