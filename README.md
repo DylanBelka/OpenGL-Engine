@@ -1,5 +1,5 @@
 # OpenGL-Engine
-Simple OpenGL Engine
+OpenGL Engine
 
 ####Dependencies
 
