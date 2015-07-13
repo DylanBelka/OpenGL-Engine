@@ -11,6 +11,6 @@ OpenGL Engine
 
 * SOIL image loader
 
-* SDL (or optionally SFML)
+* SDL
 
 * GLM
