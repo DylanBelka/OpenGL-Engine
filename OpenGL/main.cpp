@@ -1,7 +1,13 @@
 #include <iostream>
 #include <random>
 
+<<<<<<< HEAD
 #include <glm/glm.hpp>
+=======
+#include <glew.h>
+#include <glm/glm.hpp>
+//test
+>>>>>>> 9785578d2f42e08521751f2fbba8e69a589d97f2
 
 #include "tiny_obj_loader.h"
 
@@ -18,6 +24,17 @@
 
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
+<<<<<<< HEAD
+=======
+/* TODO:
+Fix timer/ make better one
+Create light class that has mesh
+Create a lower poly sphere to use for stars - instanced
+*/
+
+static sf::Clock gameClock;
+
+>>>>>>> 9785578d2f42e08521751f2fbba8e69a589d97f2
 int main(int argc, char **argv)
 {
 	Display display(800, 600, "OpenGL");
