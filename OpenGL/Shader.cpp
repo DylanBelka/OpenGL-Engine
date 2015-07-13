@@ -8,7 +8,7 @@ Shader::Shader(const std::string& fileName) :
 {
 	program = glCreateProgram();
 
-	white.bind(0);
+	//white.bind(0);
 
 	std::string vertexShaderSource = fileLoader(fileName + ".vs");
 	std::string fragmentShaderSource = fileLoader(fileName + ".fs");
@@ -223,4 +223,10 @@ BasicMesh Shader::createLightMesh()
 {
 	BasicMesh cube("cube.obj", white.getTexture(), program);
 	return cube;
+}
+
+void cleanUpShaders()
+{
+	delete Shaders::mainShader;
+	delete Shaders::instancedShader;
 }

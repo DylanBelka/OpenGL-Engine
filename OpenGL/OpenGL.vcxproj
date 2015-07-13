@@ -52,13 +52,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\opengl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\New_Program_Stuff\OpenGL\include;D:\opengl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\opengl\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glew32s.lib;OpenGL32.lib;SOIL.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\New_Program_Stuff\OpenGL\lib;D:\opengl\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;glew32s.lib;OpenGL32.lib;SOIL.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,6 +82,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="BasicMesh.cpp" />
     <ClCompile Include="CubeMap.cpp" />
     <ClCompile Include="Display.cpp" />
@@ -89,17 +90,21 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="tiny_obj_loader.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h" />
     <ClInclude Include="BasicMesh.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CubeMap.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="InstancedMesh.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="tiny_obj_loader.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>

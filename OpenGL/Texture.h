@@ -25,11 +25,19 @@ public:
 		}
 	}
 
+	Texture()
+	{
+		texture = 0;
+	}
+
 	~Texture()
 	{
 		glDeleteTextures(1, &texture);
 	}
 
+	GLuint getTexture() { return texture; }
+
+private:
 	void bind(unsigned unit = 0) const
 	{
 		assert(unit <= 31 && unit >= 0);
@@ -37,9 +45,6 @@ public:
 		glBindTexture(GL_TEXTURE_2D, texture);
 	}
 
-	GLuint getTexture() { return texture; }
-
-private:
 	GLuint texture;
 };
 

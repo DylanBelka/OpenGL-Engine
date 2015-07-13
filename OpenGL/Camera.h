@@ -29,6 +29,7 @@ public:
 	glm::vec3& getUp() { return up; }
 
 	glm::vec2& getAngle() { return angle; }
+	void setAngle(glm::vec2& theta) { angle = theta; }
 	glm::vec3& getRight() { return right; }
 
 private:
