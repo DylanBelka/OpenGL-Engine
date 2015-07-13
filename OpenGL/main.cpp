@@ -7,6 +7,9 @@
 #include <glew.h>
 #include <glm/glm.hpp>
 //test
+<<<<<<< HEAD
+>>>>>>> 9785578d2f42e08521751f2fbba8e69a589d97f2
+=======
 >>>>>>> 9785578d2f42e08521751f2fbba8e69a589d97f2
 
 #include "tiny_obj_loader.h"
