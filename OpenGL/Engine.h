@@ -1,7 +1,7 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include <vector>
+#include <map>
 
 #include "Shader.h"
 #include "Display.h"
@@ -24,6 +24,8 @@ public:
 	Shader* getShader() { return shader; }
 	Shader* getInstancedShader() { return shader; }
 
+	Actor& getActor(const std::string& name) { return actors[name]; }
+
 private:
 	Display* display;
 	TextureManager* textureManager;
@@ -31,7 +33,7 @@ private:
 	Shader* shader;
 	Shader* instancedShader;
 
-	std::vector<Actor> actors;
+	std::map<std::string, Actor> actors;
 };
 
 #endif

@@ -30,8 +30,10 @@ int main(int argc, char **argv)
 	engine.getShader()->pushLight(Light(glm::vec3(1.2f, 1.0f, 2.0f), glm::vec3(1.0, 1.0, 1.0)));
 	engine.getShader()->pushLight(Light(glm::vec3(2.f, 1.f, -1.f)));
 
-	Actor a(engine, "monkey.obj", "brick.png");
+	Actor a(engine, "monkey.obj", "a", "brick.png");
 	engine.addActor(a);
+	Actor b(engine, "cube.obj", "b", "white.png");
+	engine.addActor(b);
 	
 	float counter = 0.0;
 	while (engine.isRunning())
@@ -39,6 +41,8 @@ int main(int argc, char **argv)
 		double lastTime = SDL_GetTicks();
 
 		engine.render();
+
+		engine.getActor("a").moveTo(glm::vec3(sin(counter), cos(counter), tan(counter)));
 
 		double deltaT = (SDL_GetTicks() - lastTime) / 1000;
 		const double fps = 60.f;
@@ -48,7 +52,7 @@ int main(int argc, char **argv)
 		}
 
 		engine.handleEvents(deltaT);
-		counter += 0.001;
+		counter += 0.1;
 	}
 
 	return 0;

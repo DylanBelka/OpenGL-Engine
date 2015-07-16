@@ -28,9 +28,9 @@ void Engine::render()
 	shader->use();
 	shader->update(*camera);
 
-	for (Actor& a : actors)
+	for (std::map<std::string, Actor>::iterator it = actors.begin(); it != actors.end(); it++)
 	{
-		a.draw();
+		it->second.draw();
 	}
 
 	display->display();
@@ -43,5 +43,5 @@ void Engine::handleEvents(double dt)
 
 void Engine::addActor(Actor& actor)
 {
-	actors.push_back(actor);
+	actors[actor.getName()] = actor;
 }
