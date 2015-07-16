@@ -8,7 +8,6 @@ class Camera
 {
 public:
 	Camera(const glm::vec3& pos, float fov, float aspect, float zNear, float zFar);
-	Camera();
 
 	void init(const glm::vec3& pos, const float aspect, float fov, float zNear, float zFar);
 
