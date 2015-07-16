@@ -54,9 +54,6 @@ void Display::display()
 	SDL_GL_SwapWindow(window);
 }
 
-static float speed = 500;				// camera movement speed
-static const double mouseSpeed = .025;	// camera mouse movement speed
-
 void Display::handleEvents(Camera* camera, float deltaTime)
 {
 	SDL_Event event;
@@ -71,8 +68,8 @@ void Display::handleEvents(Camera* camera, float deltaTime)
 				Mouse::angleX = &camera->getAngle().x;	// get the address of the x and y components of the camera rotation
 				Mouse::angleY = &camera->getAngle().y;
 
-				*Mouse::angleX += mouseSpeed * deltaTime * ((float)width / 2 - (float)Mouse::x);		// update the camera rotation
-				*Mouse::angleY += mouseSpeed * deltaTime * ((float)height / 2 - (float)Mouse::y);
+				*Mouse::angleX += Mouse::speed * deltaTime * ((float)width / 2 - (float)Mouse::x);		// update the camera rotation
+				*Mouse::angleY += Mouse::speed * deltaTime * ((float)height / 2 - (float)Mouse::y);
 				
 				camera->getForward() = glm::normalize(glm::vec3(cos(*Mouse::angleY) * sin(*Mouse::angleX),			// update the forward vector of the camera
 					sin(*Mouse::angleY),
