@@ -7,35 +7,12 @@
 class Camera
 {
 public:
-	Camera(const glm::vec3& pos, float fov, float aspect, float zNear, float zFar)
-	{
-		perspective = glm::perspective(fov, aspect, zNear, zFar);
-		position = pos;
-		forward = glm::vec3(0, 0, 1);
-		up = glm::vec3(0, 1, 0);
-		angle = glm::vec2(0, 0);
-		right = glm::vec3();
-	}
+	Camera(const glm::vec3& pos, float fov, float aspect, float zNear, float zFar);
+	Camera();
 
-	Camera()
-	{
-		position = glm::vec3(0, 0, 0);
-		forward = glm::vec3(0, 0, 1);
-		up = glm::vec3(0, 1, 0);
-		angle = glm::vec2(0, 0);
-		right = glm::vec3();
-	}
+	void init(const glm::vec3& pos, const float aspect, float fov, float zNear, float zFar);
 
-	void init(const glm::vec3& pos, const float aspect, float fov, float zNear, float zFar)
-	{
-		position = pos;
-		perspective = glm::perspective(fov, aspect, zNear, zFar);
-	}
-
-	inline glm::mat4 getViewProjection() const
-	{
-		return perspective * glm::lookAt(position, position + forward, up); 
-	}
+	glm::mat4 getViewProjection() const;
 
 	glm::vec3& getPos() { return position; }
 	glm::vec3 getPosition() const { return position; }
