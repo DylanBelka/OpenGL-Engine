@@ -22,6 +22,4 @@ private:
 	void operator=(TextureManager const&) = delete;
 };
 
-static TextureManager* textureManager;
-
 #endif

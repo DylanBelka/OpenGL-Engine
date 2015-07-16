@@ -189,9 +189,3 @@ void Shader::popLight()
 	GLuint colorLoc = glGetUniformLocation(program, ("lightColors[" + index + "]").c_str());
 	lightColorUniformLocations.push_back(colorLoc);
 }
-
-void cleanUpShaders()
-{
-	delete Shaders::mainShader;
-	delete Shaders::instancedShader;
-}

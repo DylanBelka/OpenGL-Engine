@@ -74,13 +74,4 @@ private:
 	GLuint uniforms[NUM_UNIFORMS];
 };
 
-// global shaders for entire program
-namespace Shaders
-{
-	static Shader* mainShader;
-	static Shader* instancedShader;
-}
-
-void cleanUpShaders();
-
 #endif // SHADER_H

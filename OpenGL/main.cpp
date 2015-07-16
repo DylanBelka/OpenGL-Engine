@@ -14,55 +14,31 @@
 #include "Player.h"
 #include "TextureManager.h"
 #include "Engine.h"
+#include "Actor.h"
 
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
 int main(int argc, char **argv)
 {
-	Display display(800, 600, "OpenGL");
-	display.setClearColor(glm::vec3(0.0, 0.0, 0.0));
+	Engine engine;
 
-	Camera camera(glm::vec3(0.0, 0.0, -10.0), 70, (float)display.getWidth() / (float)display.getHeight(), .1, 1000.0);
+	engine.getTextureManager()->addTexture("brick.png");
+	engine.getTextureManager()->addTexture("test.png");
+	engine.getTextureManager()->addTexture("blue.png");
+	engine.getTextureManager()->addTexture("white.png");
 
-	Shaders::mainShader = new Shader("shader");
-	Shaders::instancedShader = new Shader("instancedShader");
+	engine.getShader()->pushLight(Light(glm::vec3(1.2f, 1.0f, 2.0f), glm::vec3(1.0, 1.0, 1.0)));
+	engine.getShader()->pushLight(Light(glm::vec3(2.f, 1.f, -1.f)));
 
-	textureManager = new TextureManager();
-
-	textureManager->addTexture("brick.png");
-	textureManager->addTexture("test.png");
-	textureManager->addTexture("blue.png");
-	textureManager->addTexture("white.png");
-
-	BasicMesh monkey("monkey.obj", textureManager->getTexture("brick.png"), Shaders::mainShader->getProgram());
-	BasicMesh cube("cube.obj", textureManager->getTexture("white.png"), Shaders::mainShader->getProgram());
-	BasicMesh cube2("cube.obj", textureManager->getTexture("brick.png"), Shaders::mainShader->getProgram());
-	BasicMesh plane("plane.obj", textureManager->getTexture("brick.png"), Shaders::mainShader->getProgram());
-	//BasicMesh sphere("sphere.obj", texture.getTexture(), Shaders::mainShader->getProgram());
-	BasicMesh sphere("spherelow.obj", textureManager->getTexture("white.png"), Shaders::mainShader->getProgram());
-
-	Shaders::mainShader->pushLight(Light(glm::vec3(1.2f, 1.0f, 2.0f), glm::vec3(1.0, 1.0, 1.0)));
-	Shaders::mainShader->pushLight(Light(glm::vec3(2.f, 1.f, -1.f)));
-
-	std::cout << "starting" << std::endl;
+	Actor a(engine, "monkey.obj", "brick.png");
+	engine.addActor(a);
 	
 	float counter = 0.0;
-	while (display.isOpen())
+	while (engine.isRunning())
 	{
 		double lastTime = SDL_GetTicks();
-		display.clear();
 
-		Shaders::mainShader->use();
-		Shaders::mainShader->update(camera);
-		// BasicMesh drawing goes here
-
-		monkey.draw();
-		cube.draw();
-		cube2.draw();
-		plane.draw();
-		sphere.draw();
-
-		display.display();
+		engine.render();
 
 		double deltaT = (SDL_GetTicks() - lastTime) / 1000;
 		const double fps = 60.f;
@@ -71,12 +47,9 @@ int main(int argc, char **argv)
 			SDL_Delay(1000 / fps - deltaT);
 		}
 
-		//display.handleEvents(camera, cube2, deltaT);
-		display.handleEvents(camera, deltaT);
+		engine.handleEvents(deltaT);
 		counter += 0.001;
 	}
-
-	cleanUpShaders();
 
 	return 0;
 }

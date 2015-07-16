@@ -57,7 +57,7 @@ void Display::display()
 static float speed = 500;				// camera movement speed
 static const double mouseSpeed = .025;	// camera mouse movement speed
 
-void Display::handleEvents(Camera& camera, float deltaTime)
+void Display::handleEvents(Camera* camera, float deltaTime)
 {
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
@@ -69,22 +69,21 @@ void Display::handleEvents(Camera& camera, float deltaTime)
 				int mousePosX, mousePosY;
 				SDL_GetMouseState(&mousePosX, &mousePosY);
 
-				float* angleX = &camera.getAngle().x;	// get the address of the x and y components of the camera rotation
-				float* angleY = &camera.getAngle().y;
+				float* angleX = &camera->getAngle().x;	// get the address of the x and y components of the camera rotation
+				float* angleY = &camera->getAngle().y;
 
 				*angleX += mouseSpeed * deltaTime * ((float)width / 2 - (float)mousePosX);		// update the camera rotation
 				*angleY += mouseSpeed * deltaTime * ((float)height / 2 - (float)mousePosY);
 				
-				camera.getForward() = glm::normalize(glm::vec3(cos(*angleY) * sin(*angleX),			// update the forward vector of the camera
+				camera->getForward() = glm::normalize(glm::vec3(cos(*angleY) * sin(*angleX),			// update the forward vector of the camera
 					sin(*angleY),
 					cos(*angleY) * cos(*angleX)));
 
-				camera.getRight() = glm::normalize(glm::vec3(sin(*angleX - glm::half_pi<float>()),		// calculate the mouse's new relative right direction vector
+				camera->getRight() = glm::normalize(glm::vec3(sin(*angleX - glm::half_pi<float>()),		// calculate the mouse's new relative right direction vector
 					0,
 					cos(*angleX - glm::half_pi<float>())));
 
-				camera.getUp() = glm::cross(camera.getRight(), camera.getForward());
-				//std::cout << glm::to_string(camera.getUp()) << std::endl;
+				camera->getUp() = glm::cross(camera->getRight(), camera->getForward());
 			}
 			break;
 			case SDL_KEYDOWN:
@@ -95,27 +94,27 @@ void Display::handleEvents(Camera& camera, float deltaTime)
 				}
 				if (event.key.keysym.sym == SDLK_w)
 				{
-					camera.getPos() += camera.getForward() * speed * deltaTime;
+					camera->getPos() += camera->getForward() * speed * deltaTime;
 				}
 				if (event.key.keysym.sym == SDLK_s)
 				{
-					camera.getPos() -= camera.getForward() * speed * deltaTime;
+					camera->getPos() -= camera->getForward() * speed * deltaTime;
 				}
 				if (event.key.keysym.sym == SDLK_a)
 				{
-					camera.getPos() -= camera.getRight() * speed * deltaTime;
+					camera->getPos() -= camera->getRight() * speed * deltaTime;
 				}
 				if (event.key.keysym.sym == SDLK_d)
 				{
-					camera.getPos() += camera.getRight() * speed * deltaTime;
+					camera->getPos() += camera->getRight() * speed * deltaTime;
 				}
 				if (event.key.keysym.sym == SDLK_SPACE)
 				{
-					camera.getPos() += camera.getUp() * speed * deltaTime;
+					camera->getPos() += camera->getUp() * speed * deltaTime;
 				}
 				if (event.key.keysym.sym == SDLK_LCTRL)
 				{
-					camera.getPos() -= camera.getUp() * speed * deltaTime;
+					camera->getPos() -= camera->getUp() * speed * deltaTime;
 				}
 				if (event.key.keysym.sym == SDLK_LSHIFT)
 				{
