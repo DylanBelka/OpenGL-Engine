@@ -1,12 +1,9 @@
 #include "Light.h"
 
-Light::Light(BasicMesh m, glm::vec3 pos, glm::vec3 color) :
-lightMesh(m)
+Light::Light(glm::vec3 pos, glm::vec3 color)
 {
 	position = pos;
 	this->color = color;
-	lightMesh.getPosition() = pos;
-	lightMesh.getScale() *= .1;
 }
 
 bool Light::operator==(Light& other)

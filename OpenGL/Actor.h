@@ -13,7 +13,7 @@ public:
 
 private:
 	BasicMesh mesh;
-	double x, y;
+	double velocityX, velocityY;
 };
 
 #endif

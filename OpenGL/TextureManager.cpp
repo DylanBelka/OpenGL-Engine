@@ -20,13 +20,15 @@ void TextureManager::addTexture(const std::string& textureFileName)
 GLuint TextureManager::getTexture(const std::string& textureName)
 {
 	Texture* txptr = textures[textureName];
-	if (txptr == nullptr)			// if the texture does not already exist
-	{								// make it and then search for it
-		addTexture(textureName);	// there is a chance that a created texture is invalid for some reason
-		getTexture(textureName);	// so instead get the texture by recursively calling this function until a valid one is created
-	}
-	else
+	if (txptr == nullptr)			// if the texture does not already exist, create it
 	{
-		return txptr->getTexture();
+		addTexture(textureName);
+		txptr = textures[textureName];
+		if (txptr == nullptr)		// make sure that the created texture was created succesfully
+		{
+			std::cerr << "Texture " << textureName << " was not found and could not be created" << std::endl;
+			return 0;
+		}
 	}
+	return txptr->getHandle();
 }

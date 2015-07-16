@@ -3,12 +3,9 @@
 std::string fileLoader(const std::string& fileName);
 GLuint createShader(const std::string& shaderSource, GLenum shaderType);
 
-Shader::Shader(const std::string& fileName) :
-	white("white.png")
+Shader::Shader(const std::string& fileName)
 {
 	program = glCreateProgram();
-
-	//white.bind(0);
 
 	std::string vertexShaderSource = fileLoader(fileName + ".vs");
 	std::string fragmentShaderSource = fileLoader(fileName + ".fs");
@@ -155,24 +152,6 @@ void Shader::pushLight(Light l)
 	lightColorUniformLocations.push_back(colorLoc);
 }
 
-void Shader::pushLight(glm::vec3 pos, glm::vec3 color)
-{
-	BasicMesh m = createLightMesh();
-	Light l(m, pos, color);
-	int i = lights.size();	// get the location of the last light
-	lights.push_back(l);	// push the new light
-	std::stringstream ss;
-	std::string index;
-	ss << i;				// convert the location into a string
-	index = ss.str();
-	GLuint dirLoc = glGetUniformLocation(program, ("lightDirs[" + index + "]").c_str());	// update uniform locations
-	lightDirectionUniformLocations.push_back(dirLoc);
-
-	GLuint colorLoc = glGetUniformLocation(program, ("lightColors[" + index + "]").c_str());
-	lightColorUniformLocations.push_back(colorLoc);
-
-}
-
 void Shader::popLight(Light light)
 {
 	std::cerr << "popLight not yet tested" << std::endl;
@@ -209,20 +188,6 @@ void Shader::popLight()
 
 	GLuint colorLoc = glGetUniformLocation(program, ("lightColors[" + index + "]").c_str());
 	lightColorUniformLocations.push_back(colorLoc);
-}
-
-void Shader::drawLights()
-{
-	for (unsigned i = 0; i < lights.size(); i++)
-	{
-		lights[i].drawLight();
-	}
-}
-
-BasicMesh Shader::createLightMesh()
-{
-	BasicMesh cube("cube.obj", white.getTexture(), program);
-	return cube;
 }
 
 void cleanUpShaders()

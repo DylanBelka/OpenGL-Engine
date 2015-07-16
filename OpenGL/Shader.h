@@ -26,7 +26,6 @@ public:
 	void use();
 
 	void pushLight(Light l);
-	void pushLight(glm::vec3 pos, glm::vec3 color = glm::vec3(1.f, 1.f, 1.f));
 	void popLight(Light light);
 	void popLight();
 	void drawLights();
@@ -72,8 +71,7 @@ private:
 	std::vector<GLuint> lightDirectionUniformLocations;
 	std::vector<GLuint> lightColorUniformLocations;
 
-	GLuint uniforms[uniforms::NUM_UNIFORMS];
-	Texture white;
+	GLuint uniforms[NUM_UNIFORMS];
 };
 
 // global shaders for entire program

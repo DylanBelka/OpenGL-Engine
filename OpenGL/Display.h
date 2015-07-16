@@ -29,7 +29,6 @@ public:
 	void clear();
 
 	void handleEvents(Camera& camera, float deltaTime);
-	void handleEvents(Camera& camera, BasicMesh& mesh, float deltaTime);
 
 	void setClearColor(glm::vec3 color);
 

@@ -12,7 +12,7 @@ public:
 		x(0.f),
 		y(0.f),
 		texture("player.png"),
-		mesh(std::string("player.obj"), texture.getTexture(), Shaders::mainShader->getProgram()) {}
+		mesh(std::string("player.obj"), texture.getHandle(), Shaders::mainShader->getProgram()) {}
 
 	inline void draw()
 	{
@@ -22,8 +22,6 @@ public:
 private:
 	BasicMesh mesh;
 	Texture texture;
-
-
 
 	float x, y;
 };

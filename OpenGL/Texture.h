@@ -8,13 +8,18 @@
 #include <soil/soil.h>
 #include <glew.h>
 
+/*
+	A wrapper class for an OpenGL texture that performs loading and deletion of the texture
+	All textures are stored in an std::map in the TextureManager class
+*/
+
 class Texture
 {
 public:
 	Texture(const std::string& fileName)
 	{
-		texture = SOIL_load_OGL_texture(fileName.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
-		if (texture == NULL)
+		textureHandle = SOIL_load_OGL_texture(fileName.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+		if (textureHandle == NULL)
 		{
 			std::cerr << "SOIL loading error " << SOIL_last_result();
 			if (SOIL_last_result() == "Unable to open file")
@@ -27,25 +32,25 @@ public:
 
 	Texture()
 	{
-		texture = 0;
+		textureHandle = 0;
 	}
 
 	~Texture()
 	{
-		glDeleteTextures(1, &texture);
+		glDeleteTextures(1, &textureHandle);
 	}
 
-	GLuint getTexture() { return texture; }
+	GLuint getHandle() { return textureHandle; }
 
 private:
 	void bind(unsigned unit = 0) const
 	{
 		assert(unit <= 31 && unit >= 0);
 		glActiveTexture(GL_TEXTURE0 + unit);
-		glBindTexture(GL_TEXTURE_2D, texture);
+		glBindTexture(GL_TEXTURE_2D, textureHandle);
 	}
 
-	GLuint texture;
+	GLuint textureHandle;
 };
 
 #endif // TEXTURE_H

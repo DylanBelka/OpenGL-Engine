@@ -22,11 +22,14 @@ public:
 
 	void draw();
 
+	bool intersects(BasicMesh& other);
+
+	friend class Actor;	// allow the Actor class to manipulate positional data
+
+protected:
 	Transform &getTransform() { return transform; }
 	glm::vec3 &getPosition() { return transform.getPosition(); }
 	glm::vec3 &getScale() { return transform.getScale(); }
-
-	bool intersects(BasicMesh& other); 
 
 private:
 	enum buffers
@@ -47,7 +50,7 @@ private:
 		NUM_UNIFORMS
 	};
 
-	Position transform;
+	Transform transform;
 
 	GLuint vertexArrayObject;
 	GLuint vertexArrayBuffers[NUM_BUFFERS];
