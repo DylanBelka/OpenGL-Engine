@@ -66,22 +66,21 @@ void Display::handleEvents(Camera* camera, float deltaTime)
 		{
 			case SDL_MOUSEMOTION:
 			{
-				int mousePosX, mousePosY;
-				SDL_GetMouseState(&mousePosX, &mousePosY);
+				SDL_GetMouseState(&Mouse::x, &Mouse::y);
 
-				float* angleX = &camera->getAngle().x;	// get the address of the x and y components of the camera rotation
-				float* angleY = &camera->getAngle().y;
+				Mouse::angleX = &camera->getAngle().x;	// get the address of the x and y components of the camera rotation
+				Mouse::angleY = &camera->getAngle().y;
 
-				*angleX += mouseSpeed * deltaTime * ((float)width / 2 - (float)mousePosX);		// update the camera rotation
-				*angleY += mouseSpeed * deltaTime * ((float)height / 2 - (float)mousePosY);
+				*Mouse::angleX += mouseSpeed * deltaTime * ((float)width / 2 - (float)Mouse::x);		// update the camera rotation
+				*Mouse::angleY += mouseSpeed * deltaTime * ((float)height / 2 - (float)Mouse::y);
 				
-				camera->getForward() = glm::normalize(glm::vec3(cos(*angleY) * sin(*angleX),			// update the forward vector of the camera
-					sin(*angleY),
-					cos(*angleY) * cos(*angleX)));
+				camera->getForward() = glm::normalize(glm::vec3(cos(*Mouse::angleY) * sin(*Mouse::angleX),			// update the forward vector of the camera
+					sin(*Mouse::angleY),
+					cos(*Mouse::angleY) * cos(*Mouse::angleX)));
 
-				camera->getRight() = glm::normalize(glm::vec3(sin(*angleX - glm::half_pi<float>()),		// calculate the mouse's new relative right direction vector
+				camera->getRight() = glm::normalize(glm::vec3(sin(*Mouse::angleX - glm::half_pi<float>()),		// calculate the mouse's new relative right direction vector
 					0,
-					cos(*angleX - glm::half_pi<float>())));
+					cos(*Mouse::angleX - glm::half_pi<float>())));
 
 				camera->getUp() = glm::cross(camera->getRight(), camera->getForward());
 			}
@@ -128,11 +127,6 @@ void Display::handleEvents(Camera* camera, float deltaTime)
 				if (event.key.keysym.sym == SDLK_LSHIFT)
 				{
 					speed = 500;
-				}
-				if (event.key.keysym.sym == SDLK_e)
-				{
-					//shader.pushLight(glm::vec3(2.f, 1.f, -1.f));
-					//instancedShader.pushLight(glm::vec3(2.f, 1.f, -1.f));
 				}
 				break;
 			}

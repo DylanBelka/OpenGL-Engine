@@ -17,6 +17,7 @@
 #include "BasicMesh.h"
 #include "Shader.h"
 #include "Light.h"
+#include "Mouse.h"
 
 class Display
 {

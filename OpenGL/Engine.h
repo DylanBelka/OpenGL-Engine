@@ -24,8 +24,6 @@ public:
 	Shader* getShader() { return shader; }
 	Shader* getInstancedShader() { return shader; }
 
-	Camera* getCamera() { return camera; }
-
 private:
 	Display* display;
 	TextureManager* textureManager;

@@ -23,5 +23,4 @@ private:
 	double velocityX, velocityY;
 };
 
-
 #endif
