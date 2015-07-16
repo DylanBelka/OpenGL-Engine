@@ -8,12 +8,8 @@
 #include <sstream>
 
 #include <glew.h>
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/string_cast.hpp>
 
 #include "camera.h"
-#include "Transform.h"
-#include "Texture.h"
 #include "Light.h"
 
 class Shader
@@ -34,7 +30,6 @@ public:
 
 private:
 	GLuint createShader(const std::string& shaderSource, GLenum shaderType);
-	BasicMesh createLightMesh();
 
 private:
 

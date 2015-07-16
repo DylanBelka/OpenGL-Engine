@@ -9,9 +9,6 @@
 #include "Actor.h"
 #include "Player.h"
 
-class Actor;
-class Player;
-
 class Engine
 {
 public:
@@ -33,7 +30,6 @@ public:
 private:
 	Display* display;
 	TextureManager* textureManager;
-	//Camera* camera;
 	Shader* shader;
 	Shader* instancedShader;
 

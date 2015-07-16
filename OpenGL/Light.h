@@ -4,9 +4,6 @@
 #include <glm\glm.hpp>
 #include <glew.h>
 
-#include "BasicMesh.h"
-#include "Texture.h"
-
 class Light
 {
 public:

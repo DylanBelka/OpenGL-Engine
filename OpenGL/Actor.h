@@ -2,9 +2,6 @@
 #define ACTOR_H
 
 #include "BasicMesh.h"
-#include "Texture.h"
-#include "Shader.h"
-#include "TextureManager.h"
 #include "Engine.h"
 
 #include <glm/glm.hpp>

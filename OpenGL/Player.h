@@ -3,11 +3,7 @@
 
 #include <glm/glm.hpp>
 
-#include "BasicMesh.h"
-#include "Texture.h"
-#include "Shader.h"
 #include "Camera.h"
-#include "Engine.h"
 #include "Transform.h"
 
 class Player 

@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include <vector>
+#include <iostream>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -10,7 +11,6 @@
 #include <glew.h>
 
 #include "tiny_obj_loader.h"
-#include "Texture.h"
 #include "Transform.h"
 
 /*

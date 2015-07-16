@@ -1,8 +1,6 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
-#define USE_SDL
-
 #include <glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtx/string_cast.hpp>
@@ -13,11 +11,8 @@
 #include <iostream>
 #include <cmath>
 
-#include "Camera.h"
-#include "BasicMesh.h"
-#include "Shader.h"
-#include "Light.h"
 #include "Mouse.h"
+#include "Camera.h"
 
 class Display
 {
@@ -29,7 +24,7 @@ public:
 	void clear(float r, float g, float b);
 	void clear();
 
-	void handleEvents(Camera* camera, float deltaTime);
+	void handleEvents(Camera* player, float deltaTime);
 
 	void setClearColor(glm::vec3 color);
 
