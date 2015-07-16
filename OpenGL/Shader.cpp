@@ -140,16 +140,20 @@ void Shader::use()
 void Shader::pushLight(Light l)
 {
 	int i = lights.size();	// get the location of the last light
-	lights.push_back(l);	// push the new light
-	std::stringstream ss;
-	std::string index;
-	ss << i;				// convert the location into a string
-	index = ss.str();
-	GLuint dirLoc = glGetUniformLocation(program, ("lightDirs[" + index + "]").c_str());	// update uniform locations
-	lightDirectionUniformLocations.push_back(dirLoc);
+	if (i < MAX_LIGHTS)			// hard constant of 32 max lights
+	{
+		lights.push_back(l);	// push the new light
+		std::stringstream ss;
+		std::string index;
+		ss << i;				// convert the location into a string
+		index = ss.str();
+		// get uniforms and add them to their vectors
+		GLuint dirLoc = glGetUniformLocation(program, ("lightDirs[" + index + "]").c_str());	// update uniform locations
+		lightDirectionUniformLocations.push_back(dirLoc);
 
-	GLuint colorLoc = glGetUniformLocation(program, ("lightColors[" + index + "]").c_str());
-	lightColorUniformLocations.push_back(colorLoc);
+		GLuint colorLoc = glGetUniformLocation(program, ("lightColors[" + index + "]").c_str());
+		lightColorUniformLocations.push_back(colorLoc);
+	}
 }
 
 void Shader::popLight(Light light)

@@ -20,7 +20,7 @@ public:
 
 	const std::string& getName() const { return name; }
 
-private:
+protected:
 	BasicMesh mesh;
 	double velocityX, velocityY;
 	std::string name;

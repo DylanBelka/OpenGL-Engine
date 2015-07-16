@@ -68,6 +68,7 @@ private:
 	GLuint newLightUniforms[NUM_LIGHT_UNIFORMS];
 
 	std::vector<Light> lights;
+#define MAX_LIGHTS	32
 	std::vector<GLuint> lightDirectionUniformLocations;
 	std::vector<GLuint> lightColorUniformLocations;
 

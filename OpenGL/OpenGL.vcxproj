@@ -90,6 +90,7 @@
     <ClCompile Include="InstancedMesh.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="tiny_obj_loader.cc" />

@@ -7,6 +7,10 @@
 #include "Display.h"
 #include "TextureManager.h"
 #include "Actor.h"
+#include "Player.h"
+
+class Actor;
+class Player;
 
 class Engine
 {
@@ -29,9 +33,11 @@ public:
 private:
 	Display* display;
 	TextureManager* textureManager;
-	Camera* camera;
+	//Camera* camera;
 	Shader* shader;
 	Shader* instancedShader;
+
+	Player* player;
 
 	std::map<std::string, Actor> actors;
 };
