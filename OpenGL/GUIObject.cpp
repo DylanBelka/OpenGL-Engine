@@ -2,10 +2,13 @@
 
 GUIObject::GUIObject(std::vector<glm::vec2>& coords, GLuint texture, GLuint program) 
 {
-	uvs.push_back(glm::vec2(0.0f, 0.0f));
-	uvs.push_back(glm::vec2(1.0f, 0.0f));
-	uvs.push_back(glm::vec2(1.0f, 1.0f));
-	uvs.push_back(glm::vec2(0.0f, 1.0f));
+	const glm::vec2 uvs[] =
+	{
+		glm::vec2(0.0f, 0.0f),
+		glm::vec2(1.0f, 0.0f),
+		glm::vec2(1.0f, 1.0f),
+		glm::vec2(0.0f, 1.0f),
+	};
 
 	const GLuint elements[] = 
 	{
@@ -15,7 +18,6 @@ GUIObject::GUIObject(std::vector<glm::vec2>& coords, GLuint texture, GLuint prog
 
 	this->coords = coords;
 	this->texture = texture;
-	numCoords = coords.size();
 	glGenVertexArrays(1, &vertexArrayID);
 	glBindVertexArray(vertexArrayID);
 	glGenBuffers(NUM_BUFFERS, vertexBufferIDs);
@@ -24,7 +26,7 @@ GUIObject::GUIObject(std::vector<glm::vec2>& coords, GLuint texture, GLuint prog
 	glBufferData(GL_ARRAY_BUFFER, coords.size() * sizeof(coords), &coords[0], GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferIDs[UV_BUFFER]);
-	glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(uvs), uvs, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vertexBufferIDs[ELEMENT_BUFFER]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);

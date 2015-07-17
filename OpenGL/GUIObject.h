@@ -7,8 +7,6 @@
 #include <glew.h>
 #include <glm/glm.hpp>
 
-#include "Texture.h"
-
 class GUIObject
 {
 public:
@@ -31,8 +29,6 @@ private:
 	GLuint texture;
 	std::vector<glm::vec2> coords; // x, y only -- z is a constant -1.0 so it is always drawn in front of everything else without the need for disabling depth testing
 									// no MPV either so coordinates must be given in OpenGL coordinates rather than world coordinates
-	GLsizei numCoords;
-	std::vector<glm::vec2> uvs;
 };
 
 #endif
