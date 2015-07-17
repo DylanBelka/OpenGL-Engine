@@ -6,7 +6,7 @@
 #include "Shader.h"
 #include "Display.h"
 #include "TextureManager.h"
-#include "Actor.h"
+#include "Entity.h"
 #include "Player.h"
 
 class Engine
@@ -19,13 +19,13 @@ public:
 	void handleEvents(double dt);
 	bool isRunning() { return display->isOpen(); }
 
-	void addActor(Actor& actor);
+	void addActor(Entity& actor);
 
 	TextureManager* getTextureManager() { return textureManager; }
 	Shader* getShader() { return shader; }
 	Shader* getInstancedShader() { return shader; }
 
-	Actor& getActor(const std::string& name) { return actors[name]; }
+	Entity& getActor(const std::string& name) { return entities[name]; }
 
 private:
 	Display* display;
@@ -35,7 +35,7 @@ private:
 
 	Player* player;
 
-	std::map<std::string, Actor> actors;
+	std::map<std::string, Entity> entities;
 };
 
 #endif

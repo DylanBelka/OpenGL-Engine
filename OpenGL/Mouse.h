@@ -6,7 +6,7 @@ namespace Mouse
 	static float* angleX;
 	static float* angleY;
 
-	static const double speed = .025;
+	static const double speed = 2.5e-6;
 
 	static int x;
 	static int y;

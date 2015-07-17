@@ -29,7 +29,7 @@ Display::Display(const unsigned width, const unsigned height, const std::string&
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_PROGRAM_POINT_SIZE);
-	//SDL_SetRelativeMouseMode(SDL_TRUE);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
 Display::~Display()
@@ -54,7 +54,7 @@ void Display::display()
 	SDL_GL_SwapWindow(window);
 }
 
-static float speed = 500;				// camera movement speed
+static float speed = .25;				// camera movement speed
 
 void Display::handleEvents(Camera* camera, float deltaTime)
 {
@@ -80,7 +80,7 @@ void Display::handleEvents(Camera* camera, float deltaTime)
 				camera->getRight() = glm::normalize(glm::vec3(sin(*Mouse::angleX - glm::half_pi<float>()),		// calculate the mouse's new relative right direction vector
 					0,
 					cos(*Mouse::angleX - glm::half_pi<float>())));
-
+				
 				camera->getUp() = glm::cross(camera->getRight(), camera->getForward());
 			}
 			break;

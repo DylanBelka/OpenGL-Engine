@@ -1,6 +1,6 @@
-#include "Actor.h"
+#include "Entity.h"
 
-Actor::Actor(Engine& e, const std::string& meshFileName, const std::string& actorName, const std::string& textureFileName) :
+Entity::Entity(Engine& e, const std::string& meshFileName, const std::string& actorName, const std::string& textureFileName) :
 	velocityX(0.f),
 	velocityY(0.f),
 	name(actorName),
@@ -9,7 +9,7 @@ Actor::Actor(Engine& e, const std::string& meshFileName, const std::string& acto
 	mesh.getPosition().x = 4;
 }
 
-Actor::Actor() :
+Entity::Entity() :
 	velocityX(0.f),
 	velocityY(0.f),
 	name("unassigned"),
@@ -19,12 +19,12 @@ Actor::Actor() :
 }
 
 
-void Actor::draw()
+void Entity::draw()
 {
 	mesh.draw();
 }
 
-void Actor::moveTo(glm::vec3& pos)
+void Entity::moveTo(glm::vec3& pos)
 {
 	mesh.getPosition() = pos;
 }

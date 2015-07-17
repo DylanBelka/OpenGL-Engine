@@ -27,7 +27,7 @@ void Engine::render()
 	shader->use();
 	shader->update(*player->getCamera());
 
-	for (std::map<std::string, Actor>::iterator it = actors.begin(); it != actors.end(); it++)
+	for (std::map<std::string, Entity>::iterator it = entities.begin(); it != entities.end(); it++)
 	{
 		it->second.draw();
 	}
@@ -40,7 +40,7 @@ void Engine::handleEvents(double dt)
 	display->handleEvents(player->getCamera(), dt);
 }
 
-void Engine::addActor(Actor& actor)
+void Engine::addActor(Entity& actor)
 {
-	actors[actor.getName()] = actor;
+	entities[actor.getName()] = actor;
 }
