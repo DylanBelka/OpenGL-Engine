@@ -16,9 +16,16 @@
 class Texture
 {
 public:
-	Texture(const std::string& fileName)
+	Texture(const std::string& fileName, bool invertY)
 	{
-		textureHandle = SOIL_load_OGL_texture(fileName.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+		if (invertY)
+		{
+			textureHandle = SOIL_load_OGL_texture(fileName.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+		}
+		else  // GUI objects do not like inverted y
+		{
+			textureHandle = SOIL_load_OGL_texture(fileName.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+		}
 		if (textureHandle == NULL)
 		{
 			std::cerr << "SOIL loading error " << SOIL_last_result();

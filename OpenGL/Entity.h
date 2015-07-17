@@ -14,6 +14,7 @@ public:
 	void draw();
 
 	void moveTo(glm::vec3& pos);
+	bool instersects(Entity& other) { return mesh.intersects(other.mesh); }
 
 	const std::string& getName() const { return name; }
 

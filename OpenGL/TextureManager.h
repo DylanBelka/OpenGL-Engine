@@ -12,7 +12,7 @@ public:
 	TextureManager();
 	~TextureManager();
 
-	void addTexture(const std::string& textureFileName);
+	void addTexture(const std::string& textureFileName, bool invertY = true);
 
 	GLuint getTexture(const std::string& textureName);
 

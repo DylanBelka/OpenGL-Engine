@@ -11,9 +11,9 @@ TextureManager::~TextureManager()
 	}
 }
 
-void TextureManager::addTexture(const std::string& textureFileName)
+void TextureManager::addTexture(const std::string& textureFileName, bool invertY)
 {
-	Texture* tempTex = new Texture(textureFileName); // create textures as pointer to control lifetime
+	Texture* tempTex = new Texture(textureFileName, invertY); // create textures as pointer to control lifetime
 	textures[textureFileName] = tempTex;
 }
 

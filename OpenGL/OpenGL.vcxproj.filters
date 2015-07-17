@@ -57,6 +57,9 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GUIObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Display.h">
@@ -104,6 +107,9 @@
     <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GUIObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.fs">
@@ -116,6 +122,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="instancedShader.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="GUIShader.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="GUIShader.fs">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

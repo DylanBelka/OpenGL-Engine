@@ -1,6 +1,6 @@
 #include "Engine.h"
 
-Engine::Engine()
+Engine::Engine() 
 {
 	display = new Display(800, 600, "OpenGL");
 	display->setClearColor(glm::vec3(0.0, 0.0, 0.0));
@@ -8,6 +8,7 @@ Engine::Engine()
 	textureManager = new TextureManager();
 	shader = new Shader("shader");
 	instancedShader = new Shader("instancedShader");
+	guiShader = new Shader("GUIShader");
 	player = new Player(glm::vec3(0.0, 0.0, -10.0), 70, (float)display->getWidth() / (float)display->getHeight(), .1, 1000.0);
 }
 
@@ -32,6 +33,14 @@ void Engine::render()
 		it->second.draw();
 	}
 
+	guiShader->use();
+	guiShader->update(*player->getCamera());
+
+	for (GUIObject& o : guiObjects)
+	{
+		o.draw();
+	}
+
 	display->display();
 }
 
@@ -43,4 +52,9 @@ void Engine::handleEvents(double dt)
 void Engine::addActor(Entity& actor)
 {
 	entities[actor.getName()] = actor;
+}
+
+void Engine::addGUIObject(GUIObject& o)
+{
+	guiObjects.push_back(o);
 }
