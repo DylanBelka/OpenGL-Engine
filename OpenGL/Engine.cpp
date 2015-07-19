@@ -21,6 +21,11 @@ Engine::~Engine()
 	delete player;
 }
 
+void Engine::update()
+{
+
+}
+
 void Engine::render()
 {
 	display->clear();
@@ -49,9 +54,15 @@ void Engine::handleEvents(double dt)
 	display->handleEvents(player->getCamera(), dt);
 }
 
-void Engine::addActor(Entity& actor)
+void Engine::addEntity(Entity& entity)
 {
-	entities[actor.getName()] = actor;
+	entities[entity.getName()] = entity;
+}
+
+void Engine::addEntity(const std::string& meshFileName, const std::string& entityName, const std::string& textureFileName)
+{
+	Entity temp(*textureManager, *shader, meshFileName, entityName, textureFileName);
+	entities[entityName] = temp;
 }
 
 void Engine::addGUIObject(GUIObject& o)

@@ -23,7 +23,7 @@ public:
 
 	bool intersects(BasicMesh& other);
 
-	friend class Entity;	// allow the Actor class to manipulate positional data
+	friend class Entity;	// allow the entity class to manipulate positional data
 
 protected:
 	Transform &getTransform() { return transform; }

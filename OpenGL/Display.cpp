@@ -54,11 +54,11 @@ void Display::display()
 	SDL_GL_SwapWindow(window);
 }
 
-static float speed = .25;				// camera movement speed
+static float speed = 1;				// camera movement speed
 
 void Display::handleEvents(Camera* camera, float deltaTime)
 {
-	SDL_Event event;
+	//SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)

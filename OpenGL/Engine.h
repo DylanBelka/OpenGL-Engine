@@ -10,6 +10,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include "GUIObject.h"
+#include "InstancedMesh.h"
 
 class Engine
 {
@@ -18,10 +19,12 @@ public:
 	~Engine();
 
 	void render();
+	void update();
 	void handleEvents(double dt);
-	bool isRunning() { return display->isOpen(); }
+	bool isRunning() const { return display->isOpen(); }
 
-	void addActor(Entity& actor);
+	void addEntity(Entity& entity);
+	void addEntity(const std::string& meshFileName, const std::string& entityName, const std::string& textureFileName = "default.png");
 	void addGUIObject(GUIObject& o);
 
 	TextureManager* getTextureManager() { return textureManager; }
@@ -29,6 +32,8 @@ public:
 	Shader* getInstancedShader() { return shader; }
 
 	Entity& getEntity(const std::string& name) { return entities[name]; }
+
+	std::vector<InstancedMesh> instancedMeshes;
 
 private:
 	Display* display;

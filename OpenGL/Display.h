@@ -39,6 +39,7 @@ private:
 	int width;
 	int height;
 
+	SDL_Event event;
 	SDL_Window* window;
 	SDL_GLContext glContext;
 

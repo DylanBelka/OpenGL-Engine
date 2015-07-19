@@ -2,14 +2,15 @@
 #define ENTITY_H
 
 #include "BasicMesh.h"
-#include "Engine.h"
+#include "TextureManager.h"
+#include "Shader.h"
 
 #include <glm/glm.hpp>
 
 class Entity
 {
 public:
-	Entity(class Engine& e, const std::string& meshFileName, const std::string& actorName, const std::string& textureFileName = "default.png");
+	Entity(TextureManager& textureManager, Shader& shader, const std::string& meshFileName, const std::string& entityName, const std::string& textureFileName);
 	Entity(); // default constructor required for std::tuple which is required for std::map
 	void draw();
 

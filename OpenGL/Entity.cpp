@@ -1,10 +1,10 @@
 #include "Entity.h"
 
-Entity::Entity(Engine& e, const std::string& meshFileName, const std::string& actorName, const std::string& textureFileName) :
+Entity::Entity(TextureManager& textureManager, Shader& shader, const std::string& meshFileName, const std::string& entityName, const std::string& textureFileName) :
 	velocityX(0.f),
 	velocityY(0.f),
-	name(actorName),
-	mesh(meshFileName, e.getTextureManager()->getTexture(textureFileName), e.getShader()->getProgram())
+	name(entityName),
+	mesh(meshFileName, textureManager.getTexture(textureFileName),shader.getProgram())
 {
 	mesh.getPosition().x = 4;
 }

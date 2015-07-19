@@ -1,4 +1,4 @@
-#include "BasicMesh.h"
+ #include "BasicMesh.h"
 
 BasicMesh::BasicMesh(const std::string& fileName, GLuint texture, GLuint program, unsigned unit) :
 	transform()
