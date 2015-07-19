@@ -51,7 +51,7 @@ void Engine::render()
 
 void Engine::handleEvents(double dt)
 {
-	display->handleEvents(player->getCamera(), dt);
+	display->handleEvents(player, dt);
 }
 
 void Engine::addEntity(Entity& entity)

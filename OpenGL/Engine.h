@@ -32,8 +32,7 @@ public:
 	Shader* getInstancedShader() { return shader; }
 
 	Entity& getEntity(const std::string& name) { return entities[name]; }
-
-	std::vector<InstancedMesh> instancedMeshes;
+	Player* getPlayer() { return player; }
 
 private:
 	Display* display;

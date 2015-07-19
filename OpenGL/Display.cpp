@@ -57,7 +57,7 @@ void Display::display()
 
 static float speed = 1;				// camera movement speed
 
-void Display::handleEvents(Camera* camera, float deltaTime)
+void Display::handleEvents(Player* player, float deltaTime)
 {
 	//SDL_Event event;
 	while (SDL_PollEvent(&event))
@@ -68,21 +68,21 @@ void Display::handleEvents(Camera* camera, float deltaTime)
 			{
 				SDL_GetMouseState(&Mouse::x, &Mouse::y);
 
-				Mouse::angleX = &camera->getAngle().x;	// get the address of the x and y components of the camera rotation
-				Mouse::angleY = &camera->getAngle().y;
+				Mouse::angleX = &player->getCamera()->getAngle().x;	// get the address of the x and y components of the camera rotation
+				Mouse::angleY = &player->getCamera()->getAngle().y;
 
 				*Mouse::angleX += Mouse::speed * deltaTime * ((float)width / 2 - (float)Mouse::x);		// update the camera rotation
 				*Mouse::angleY += Mouse::speed * deltaTime * ((float)height / 2 - (float)Mouse::y);
 				
-				camera->getForward() = glm::normalize(glm::vec3(cos(*Mouse::angleY) * sin(*Mouse::angleX),			// update the forward vector of the camera
+				player->getCamera()->getForward() = glm::normalize(glm::vec3(cos(*Mouse::angleY) * sin(*Mouse::angleX),			// update the forward vector of the camera
 					sin(*Mouse::angleY),
 					cos(*Mouse::angleY) * cos(*Mouse::angleX)));
 
-				camera->getRight() = glm::normalize(glm::vec3(sin(*Mouse::angleX - glm::half_pi<float>()),		// calculate the mouse's new relative right direction vector
+				player->getCamera()->getRight() = glm::normalize(glm::vec3(sin(*Mouse::angleX - glm::half_pi<float>()),		// calculate the mouse's new relative right direction vector
 					0,
 					cos(*Mouse::angleX - glm::half_pi<float>())));
 				
-				camera->getUp() = glm::cross(camera->getRight(), camera->getForward());
+				player->getCamera()->getUp() = glm::cross(player->getCamera()->getRight(), player->getCamera()->getForward());
 			}
 			break;
 			case SDL_KEYDOWN:
@@ -93,31 +93,31 @@ void Display::handleEvents(Camera* camera, float deltaTime)
 				}
 				if (event.key.keysym.sym == SDLK_w)
 				{
-					camera->getPos() += camera->getForward() * speed * deltaTime;
+					player->getCamera()->getPos() += player->getCamera()->getForward() * speed * deltaTime;
 				}
 				if (event.key.keysym.sym == SDLK_s)
 				{
-					camera->getPos() -= camera->getForward() * speed * deltaTime;
+					player->getCamera()->getPos() -= player->getCamera()->getForward() * speed * deltaTime;
 				}
 				if (event.key.keysym.sym == SDLK_a)
 				{
-					camera->getPos() -= camera->getRight() * speed * deltaTime;
+					player->getCamera()->getPos() -= player->getCamera()->getRight() * speed * deltaTime;
 				}
 				if (event.key.keysym.sym == SDLK_d)
 				{
-					camera->getPos() += camera->getRight() * speed * deltaTime;
+					player->getCamera()->getPos() += player->getCamera()->getRight() * speed * deltaTime;
 				}
 				if (event.key.keysym.sym == SDLK_SPACE)
 				{
-					camera->getPos() += camera->getUp() * speed * deltaTime;
+					player->getCamera()->getPos() += player->getCamera()->getUp() * speed * deltaTime;
 				}
 				if (event.key.keysym.sym == SDLK_LCTRL)
 				{
-					camera->getPos() -= camera->getUp() * speed * deltaTime;
+					player->getCamera()->getPos() -= player->getCamera()->getUp() * speed * deltaTime;
 				}
 				if (event.key.keysym.sym == SDLK_LSHIFT)
 				{
-					speed = 2000;
+					speed = 2;
 				}
 			
 				break;
@@ -126,7 +126,7 @@ void Display::handleEvents(Camera* camera, float deltaTime)
 			{
 				if (event.key.keysym.sym == SDLK_LSHIFT)
 				{
-					speed = 500;
+					speed = 1;
 				}
 				break;
 			}

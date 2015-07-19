@@ -41,9 +41,11 @@ int main(int argc, char **argv)
 	std::stringstream ss;
 	std::string texture = "";
 
-	for (int i = 0; i < 1; i++)
+	const int numCubes = 30;
+
+	for (int i = 0; i < numCubes; i++)
 	{
-		for (int j = 0; j < 1; j++)
+		for (int j = 0; j < numCubes; j++)
 		{
 			float y = rand() % 3;
 
@@ -67,18 +69,12 @@ int main(int argc, char **argv)
 			}
 
 			engine.addEntity("cube.obj", name, texture);
-			engine.getEntity(name).moveTo(glm::vec3(i * 2, y, j * 2));
+			engine.getEntity(name).moveTo(glm::vec3(i * 2, y * 2, j * 2));
 		}
 	}
 
-	std::vector<glm::vec2> coords;
-	coords.push_back(glm::vec2(-.9, -.75));	// top left
-	coords.push_back(glm::vec2(-.5, -.75));	// top right
-	coords.push_back(glm::vec2(-.5, -.95));	// bottom right
-	coords.push_back(glm::vec2(-.9, -.95));	// bottom left
-
-	GUIObject o(coords, engine.getTextureManager()->getTexture("guiTest.png"), engine.getShader()->getProgram());
-	engine.addGUIObject(o);
+	engine.addEntity("monkey.obj", "test", "brick.png");
+	engine.getShader()->pushLight(Light(glm::vec3(3.0, 100.0, 10.0)));
 
 	float counter = 0.0;
 
@@ -91,6 +87,10 @@ int main(int argc, char **argv)
 
 	while (engine.isRunning())
 	{
+		std::cout << engine.getPlayer()->getCamera()->getPosition().x << std::endl;
+		std::cout << engine.getPlayer()->getCamera()->getPosition().y << std::endl;
+		std::cout << engine.getPlayer()->getCamera()->getPosition().z << std::endl;
+
 		loops = 0;
 		while (SDL_GetTicks() > nextGameTick && loops < maxFrameSkip)
 		{

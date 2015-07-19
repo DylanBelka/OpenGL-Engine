@@ -12,7 +12,7 @@
 #include <cmath>
 
 #include "Mouse.h"
-#include "Camera.h"
+#include "Player.h"
 
 class Display
 {
@@ -24,7 +24,7 @@ public:
 	void clear(float r, float g, float b);
 	void clear();
 
-	void handleEvents(Camera* player, float deltaTime);
+	void handleEvents(Player* player, float deltaTime);
 
 	void setClearColor(glm::vec3 color);
 
