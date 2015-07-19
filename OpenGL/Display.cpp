@@ -28,7 +28,8 @@ Display::Display(const unsigned width, const unsigned height, const std::string&
 	}
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_PROGRAM_POINT_SIZE);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
