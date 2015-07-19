@@ -24,28 +24,13 @@ Shader::Shader(const std::string& fileName)
 	if (!linked)
 	{
 		std::cerr << "Shader program linking failed" << std::endl;
+		return;
 	}
 	
 	uniforms[PROJECTION_UNIFORM] = glGetUniformLocation(program, "projection");
 	uniforms[TEX_SAMPLER_UNIFORM] = glGetUniformLocation(program, "tex");
-	newLightUniforms[NUM_LIGHTS_UNIFORM] = glGetUniformLocation(program, "numLights");
+	numLightsUniform = glGetUniformLocation(program, "numLights");
 	uniforms[VIEW_POS_UNIFORM] = glGetUniformLocation(program, "viewPos");
-
-	//lights.push_back(Light(glm::vec3(1.2f, 1.0f, 2.0f), glm::vec3(1.0, 1.0, 1.0)));	// world light
-	/*
-	for (unsigned i = 0; i < lights.size(); i++)
-	{
-		std::stringstream ss;
-		std::string index;
-		ss << i;
-		index = ss.str();
-		GLuint dirLoc = glGetUniformLocation(program, ("lightDirs[" + index + "]").c_str());
-		lightDirectionUniformLocations.push_back(dirLoc);
-
-		GLuint colorLoc = glGetUniformLocation(program, ("lightColors[" + index + "]").c_str());
-		lightColorUniformLocations.push_back(colorLoc);
-	}
-	*/
 }
 
 Shader::~Shader()
@@ -121,13 +106,13 @@ std::string fileLoader(const std::string& fileName)
 void Shader::update(Camera& camera)
 {
 	glUniformMatrix4fv(uniforms[PROJECTION_UNIFORM], 1, GL_FALSE, &camera.getViewProjection()[0][0]);
-	glUniform3f(uniforms[VIEW_POS_UNIFORM], camera.getPos().x, camera.getPos().y, camera.getPos().z);
-	glUniform1i(newLightUniforms[NUM_LIGHTS_UNIFORM], lights.size());
+	glUniform3f(uniforms[VIEW_POS_UNIFORM], camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
+	glUniform1i(numLightsUniform, lights.size()); 
 
 	// send all of the light data to gpu
 	for (unsigned i = 0; i < lights.size(); i++)
 	{
-		glUniform3f(lightDirectionUniformLocations[i], lights[i].getPosition().x, lights[i].getPosition().y, lights[i].getPosition().z);
+		glUniform3f(lightPosUniformLocations[i], lights[i].getPosition().x, lights[i].getPosition().y, lights[i].getPosition().z);
 		glUniform3f(lightColorUniformLocations[i], lights[i].getColor().r, lights[i].getColor().g, lights[i].getColor().b);
 	}
 }
@@ -139,57 +124,19 @@ void Shader::use()
 
 void Shader::pushLight(Light l)
 {
-	int i = lights.size();	// get the location of the last light
+	int i = lights.size();		// get the location of the next light
 	if (i < MAX_LIGHTS)			// hard constant of 32 max lights
 	{
-		lights.push_back(l);	// push the new light
+		lights.push_back(l);	// add the new light to the lights vector
 		std::stringstream ss;
 		std::string index;
 		ss << i;				// convert the location into a string
 		index = ss.str();
 		// get uniforms and add them to their vectors
-		GLuint dirLoc = glGetUniformLocation(program, ("lightDirs[" + index + "]").c_str());	// update uniform locations
-		lightDirectionUniformLocations.push_back(dirLoc);
+		GLuint dirLoc = glGetUniformLocation(program, ("lightPos[" + index + "]").c_str());	// update uniform locations
+		lightPosUniformLocations.push_back(dirLoc);
 
 		GLuint colorLoc = glGetUniformLocation(program, ("lightColors[" + index + "]").c_str());
 		lightColorUniformLocations.push_back(colorLoc);
 	}
-}
-
-void Shader::popLight(Light light)
-{
-	std::cerr << "popLight not yet tested" << std::endl;
-	int i = lights.size();	// get the location of the last light
-	for (std::vector<Light>::iterator it = lights.begin(); it < lights.end(); it++)
-	{
-		if (*it == light)
-		{
-			lights.erase(it);
-			std::stringstream ss;
-			std::string index;
-			ss << i;				// convert the location into a string
-			index = ss.str();
-			GLuint dirLoc = glGetUniformLocation(program, ("lightDirs[" + index + "]").c_str());	// update uniform locations
-			lightDirectionUniformLocations.push_back(dirLoc);
-
-			GLuint colorLoc = glGetUniformLocation(program, ("lightColors[" + index + "]").c_str());
-			lightColorUniformLocations.push_back(colorLoc);
-		}
-	}
-}
-
-void Shader::popLight()
-{
-	std::cerr << "popLight not yet tested" << std::endl;
-	int i = lights.size();	// get the location of the last light
-	lights.erase(lights.end());
-	std::stringstream ss;
-	std::string index;
-	ss << i;				// convert the location into a string
-	index = ss.str();
-	GLuint dirLoc = glGetUniformLocation(program, ("lightDirs[" + index + "]").c_str());	// update uniform locations
-	lightDirectionUniformLocations.push_back(dirLoc);
-
-	GLuint colorLoc = glGetUniformLocation(program, ("lightColors[" + index + "]").c_str());
-	lightColorUniformLocations.push_back(colorLoc);
 }

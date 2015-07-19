@@ -6,6 +6,8 @@
 #include <glew.h>
 #include <glm/glm.hpp>
 
+#include <glm/gtx/string_cast.hpp>
+
 #include "Display.h"
 #include "shader.h"
 #include "BasicMesh.h"
@@ -18,6 +20,7 @@
 #include "Entity.h"
 #include "GUIObject.h"
 #include "InstancedMesh.h"
+#include "Light.h"
 
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
@@ -31,8 +34,9 @@ int main(int argc, char **argv)
 	engine.getTextureManager()->addTexture("white.png");
 	engine.getTextureManager()->addTexture("guiTest.png", false);
 
-	engine.getShader()->pushLight(Light(glm::vec3(1.2f, 1.0f, 2.0f), glm::vec3(1.0, 1.0, 1.0)));
-	engine.getShader()->pushLight(Light(glm::vec3(2.f, 1.f, -1.f)));
+	//engine.getShader()->pushLight(Light(glm::vec3(1.2f, 1.0f, 2.0f), glm::vec3(1.0, 1.0, 1.0)));
+	//engine.getShader()->pushLight(Light(glm::vec3(2.f, 1.0f, -1.0f), glm::vec3(0.5, 0.0, 0.0)));
+	//engine.getShader()->pushLight(Light(glm::vec3(3.0, 10.0, 10.0f), glm::vec3(1.0, 1.0, 1.0)));
 
 	std::vector<std::string> names;
 
@@ -41,7 +45,7 @@ int main(int argc, char **argv)
 	std::stringstream ss;
 	std::string texture = "";
 
-	const int numCubes = 30;
+	const int numCubes = 0;
 
 	for (int i = 0; i < numCubes; i++)
 	{
@@ -73,16 +77,25 @@ int main(int argc, char **argv)
 		}
 	}
 
-	engine.addEntity("monkey.obj", "test", "brick.png");
-	engine.getShader()->pushLight(Light(glm::vec3(3.0, 100.0, 10.0)));
+	//engine.addEntity("spherelow.obj", "test", "brick.png");
+	//engine.addEntity("spherelow.obj", "test2", "brick.png");
+	//engine.addEntity("spherelow.obj", "tes3", "brick.png");
+
+	//engine.getEntity("test").moveTo(glm::vec3(1.2f, 1.0f, 2.0f));
+	//engine.getEntity("test2").moveTo(glm::vec3(2.f, 1.0f, -1.0f));
+	//engine.getEntity("test3").moveTo(glm::vec3(3.0, 10.0, 10.0f));
+
+	engine.addEntity("cube.obj", "cube", "brick.png");
+	engine.getEntity("cube").moveTo(glm::vec3(5.0f, 3.0f, 3.0f));
+	engine.getShader()->pushLight(Light(glm::vec3(5.0f, 4.0f, 3.0f)));
 
 	float counter = 0.0;
 
-	const int ticksPerSecond = 60;
-	const int skipTicks = ticksPerSecond / 1000;
+	const int ticksPerSecond = 120;
+	const double skipTicks = ticksPerSecond / 1000.f;
 	const int maxFrameSkip = 5;
 
-	unsigned long nextGameTick = SDL_GetTicks();
+	double nextGameTick = SDL_GetTicks();
 	int loops;
 
 	while (engine.isRunning())

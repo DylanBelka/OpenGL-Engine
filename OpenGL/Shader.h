@@ -28,6 +28,8 @@ public:
 
 	GLuint getProgram() { return program; }
 
+	std::vector<Light> getLights() { return lights; }
+
 private:
 	GLuint createShader(const std::string& shaderSource, GLenum shaderType);
 
@@ -53,19 +55,12 @@ private:
 		NUM_UNIFORMS
 	};
 
-	enum lightsUniforms
-	{
-		NUM_LIGHTS_UNIFORM,
-
-		NUM_LIGHT_UNIFORMS
-	};
-
-	GLuint newLightUniforms[NUM_LIGHT_UNIFORMS];
+	GLuint numLightsUniform;
 
 	std::vector<Light> lights;
 #define MAX_LIGHTS	32
-	std::vector<GLuint> lightDirectionUniformLocations;
-	std::vector<GLuint> lightColorUniformLocations;
+	std::vector<GLuint> lightPosUniformLocations;	// memory locations of the positions of the lights
+	std::vector<GLuint> lightColorUniformLocations;		// memory locations of the colors of the lights
 
 	GLuint uniforms[NUM_UNIFORMS];
 };

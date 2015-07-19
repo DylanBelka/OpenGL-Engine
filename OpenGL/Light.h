@@ -12,6 +12,8 @@ public:
 	const glm::vec3 getPosition() { return position; }
 	const glm::vec3 getColor() { return color; }
 
+	void setColor(glm::vec3 c) { color = c; }
+
 	bool operator==(Light& other);
 
 private:

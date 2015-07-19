@@ -30,7 +30,7 @@ Display::Display(const unsigned width, const unsigned height, const std::string&
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
-	SDL_SetRelativeMouseMode(SDL_TRUE);
+	//SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
 Display::~Display()
@@ -55,7 +55,7 @@ void Display::display()
 	SDL_GL_SwapWindow(window);
 }
 
-static const float speed = 1;				// camera movement speed
+static const float speed = 1;				// player movement speed
 
 void Display::handleEvents(Player* player, float deltaTime)
 {
