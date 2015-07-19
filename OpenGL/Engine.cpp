@@ -19,6 +19,7 @@ Engine::~Engine()
 	delete shader;
 	delete instancedShader;
 	delete player;
+	delete guiShader;
 }
 
 void Engine::update()
