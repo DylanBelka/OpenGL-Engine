@@ -15,7 +15,7 @@ public:
 
 	Camera* getCamera() { return camera; }
 
-	void move(const glm::vec3& pos);
+	void move(const glm::vec3& movement);
 
 	glm::vec3 getPosition() { return transform.getPosition(); }
 

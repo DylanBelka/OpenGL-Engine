@@ -87,10 +87,6 @@ int main(int argc, char **argv)
 
 	while (engine.isRunning())
 	{
-		std::cout << engine.getPlayer()->getCamera()->getPosition().x << std::endl;
-		std::cout << engine.getPlayer()->getCamera()->getPosition().y << std::endl;
-		std::cout << engine.getPlayer()->getCamera()->getPosition().z << std::endl;
-
 		loops = 0;
 		while (SDL_GetTicks() > nextGameTick && loops < maxFrameSkip)
 		{

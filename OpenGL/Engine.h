@@ -3,6 +3,7 @@
 
 #include <map>
 #include <vector>
+#include <iostream>
 
 #include "Shader.h"
 #include "Display.h"
@@ -46,6 +47,8 @@ private:
 	Player* player;
 
 	std::map<std::string, Entity> entities;
+
+	std::vector<int> keysPressed;
 };
 
 #endif

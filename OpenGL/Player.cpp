@@ -10,8 +10,8 @@ void Player::initCamera(const glm::vec3& pos, const float aspect, float fov, flo
 	camera->init(pos, aspect, fov, zNear, zFar);
 }
 
-void Player::move(const glm::vec3& pos)
+void Player::move(const glm::vec3& movement)
 {
-	transform.getPosition() = pos;
-	camera->getPosition() = pos;
+	transform.getPosition() += movement;
+	camera->getPos() += movement;
 }

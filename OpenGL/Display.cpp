@@ -55,11 +55,10 @@ void Display::display()
 	SDL_GL_SwapWindow(window);
 }
 
-static float speed = 1;				// camera movement speed
+static const float speed = 1;				// camera movement speed
 
 void Display::handleEvents(Player* player, float deltaTime)
 {
-	//SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
@@ -93,40 +92,27 @@ void Display::handleEvents(Player* player, float deltaTime)
 				}
 				if (event.key.keysym.sym == SDLK_w)
 				{
-					player->getCamera()->getPos() += player->getCamera()->getForward() * speed * deltaTime;
+					player->move(player->getCamera()->getForward() * speed * deltaTime);
 				}
 				if (event.key.keysym.sym == SDLK_s)
 				{
-					player->getCamera()->getPos() -= player->getCamera()->getForward() * speed * deltaTime;
+					player->move(-player->getCamera()->getForward() * speed * deltaTime);
 				}
 				if (event.key.keysym.sym == SDLK_a)
 				{
-					player->getCamera()->getPos() -= player->getCamera()->getRight() * speed * deltaTime;
+					player->move(-player->getCamera()->getRight() * speed * deltaTime);
 				}
 				if (event.key.keysym.sym == SDLK_d)
 				{
-					player->getCamera()->getPos() += player->getCamera()->getRight() * speed * deltaTime;
+					player->move(player->getCamera()->getRight() * speed * deltaTime);
 				}
 				if (event.key.keysym.sym == SDLK_SPACE)
 				{
-					player->getCamera()->getPos() += player->getCamera()->getUp() * speed * deltaTime;
+					player->move(player->getCamera()->getUp() * speed * deltaTime);
 				}
 				if (event.key.keysym.sym == SDLK_LCTRL)
 				{
-					player->getCamera()->getPos() -= player->getCamera()->getUp() * speed * deltaTime;
-				}
-				if (event.key.keysym.sym == SDLK_LSHIFT)
-				{
-					speed = 2;
-				}
-			
-				break;
-			}
-			case SDL_KEYUP:
-			{
-				if (event.key.keysym.sym == SDLK_LSHIFT)
-				{
-					speed = 1;
+					player->move(-player->getCamera()->getUp() * speed * deltaTime);
 				}
 				break;
 			}
